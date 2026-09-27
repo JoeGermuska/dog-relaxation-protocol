@@ -1,0 +1,382 @@
+// Data transcribed from the OSU Veterinary Medical Center "Relaxation Exercises" protocol.
+// Each module is a set of steps to work through in one training session (2-5 min),
+// stopping and backing up a level whenever the dog shows signs of stress.
+
+const INTRO = {
+  purpose: `The purpose of these exercises is to teach your dog to lie calmly in a designated
+spot and relax. This is the foundation on which we can work to make your dog less anxious
+and reactive, to increase your dog's independence from you and to repair (or establish) the
+relationship you have with your dog. These exercises serve to convince your dog that when on
+his mat, he is safe and does not need to follow you. These exercises will promote a trusting
+relationship with your dog by providing a pleasant, non-threatening means of interacting with
+him. Over the next few months, you will be teaching your dog to reliably relax as a basis for
+future behavior modification.`,
+  progress: `Your dog must be able to relax reliably in benign settings before you can expect
+him to relax in more provocative ones. Like many other skills, practice makes perfect. The more
+practice your dog gets being relaxed on his mat, the easier it will be to use it as a tool to
+control his behavior in situations previously stressful for him. As with all training exercises,
+you should progress slowly and back up if your dog is not successful.`,
+  exercises: `Your dog's job is to lie down calmly on a mat while you expose him to a series of
+distractions. Each time your dog is able to stay on his mat and remain calm while exposed to the
+listed distractions, he is rewarded with a small food treat. The exercises are easy in the
+beginning but become more challenging as you progress. Although it may seem that these exercises
+do not address your dog's particular problems (e.g., reactivity to unfamiliar people), the
+foundation that you build will allow you to direct him to remain calm in future stressful
+situations.
+
+While these exercises may look similar to teaching a "down/stay" in obedience class, the intent
+is not the same. In obedience class, the emotional state of the dog is not the primary concern.
+When training the relaxation exercises, your dog's ability to relax is the primary goal. While
+practicing, monitor your dog's body language closely. If he exhibits any signs of anxiety (see
+list below), stop the training, ask him to do something fun and easy like SIT or DOWN and reward
+him with food. End your training session. The next time that you start training, begin with a
+less challenging step, just before the last level at which he was successful.`,
+  household: `All members of the household who are willing and able should participate.
+Consistency is important, as your dog needs to be able to relax in response to different
+individuals.`,
+  mat: `The exercises are intended to be practiced with a mat. Choose any type of mat on which
+your dog will be comfortable lying for extended periods (a yoga mat, bath mat, throw rug or
+crate cushion). The mat should be portable and large enough to fit your dog's entire body when
+lying down. The mat should be present only when you are training — pick it up and put it away
+when you're done. This adds a second cue for relaxation that is separate from you.`,
+  modules: `The exercises are presented as modules. Each line of a module is a separate exercise.
+Your dog should be able to remain relaxed through each exercise before you attempt the next one.
+Work with your dog in five-minute sessions or less. There are 15 modules. It typically takes 2-3
+months to work through the entire program.
+
+You may do the exercises in each module in any order; however your dog will be more successful
+if you do the easier exercises first. If your dog does not succeed at a certain exercise, contact
+the Behavior Service. If your dog should get up, simply ask him again to lie down and continue
+with the exercises.`,
+  room: `Choose a room for the exercises in which your dog is comfortable. Practice in that room
+until your dog can succeed at all of the exercises in all fifteen modules at least two times over
+multiple sessions. Please note that your dog will not be able to complete all 15 modules in one
+five minute session — this will enhance your dog's ability to succeed and progress.
+
+When you have completed the entire workbook, repeat all of the exercises in various rooms and
+locations around your home. Your dog will proceed more quickly because he is familiar with the
+exercises. Leave more challenging locations such as foyers, entry ways and rooms with large, open
+windows for last.
+
+Work with your dog outdoors as well as inside. When working outside, minimize disruptions by
+choosing to work during times of the day with the least neighborhood activity. Use a 20-30 foot
+leash outdoors so that you can gently draw a distracted dog back to you when necessary. Always
+use a lead if working in an unfenced area.`,
+  reward: `Reward your dog each time he is correct throughout the program. Although you will
+eventually not be rewarding your dog for every small step, rewards are necessary at this stage.
+When he is ready for more advanced work, contact the Behavior Service and they will outline how
+you can reduce the number of food rewards.`,
+  treats: [
+    "Choose any food that your dog likes, can be swallowed quickly, does not cause him to be too excited and is relatively healthy",
+    "Use novel foods that your dog enjoys, but not so much that his excitement interferes with the exercises",
+    "The size of treats should be very small, about ¼ inch, and should not make up the bulk of the dog's diet",
+    "Use low-salt, low-fat varieties when possible and avoid foods high in fat, sugar and preservatives",
+    "If your dog loses interest in one treat, try another",
+    "Suggested food treats include tiny pieces of cheese, boiled chicken or freeze dried liver, chopped vegetables, biscuits and Cheerios",
+  ],
+  gettingStarted: [
+    "Begin by placing a mat on the floor in the room that you have chosen. Look at the module to see what exercises you will be working on.",
+    "Ask your dog to lie down on the mat directly in front of and facing you. Novices may sit until they get the idea.",
+    "Once your dog is lying down, say “Good Boy. Stay.” and give him a food reward. Before each exercise, gently tell him to STAY and, if he does, say “Good Boy”.",
+    "When you finish the exercise and return to your dog, immediately give your dog the food reward.",
+  ],
+  gettingStartedNotes: `Continue with the exercises, reminding him to "Stay" and repeating "Good
+Boy" before giving a food treat. Keep your voice soft and monotonous.
+
+Refrain from reaching for or petting your dog during these exercises; most dogs become too
+distracted if touched. You are also trying to improve your dog's ability to relax without you.
+If you continually pet him, he will continue to look to you for attention during these exercises.
+If your dog is able to lie down and stay calm and relaxed during the exercise, try another
+exercise; otherwise, you should repeat it.
+
+Some dogs will try to make eye contact with you, especially if you have been teaching the LOOK
+cue as directed. If your dog tries to make eye contact with you, do not say anything to him or
+reward him, simply turn your head and continue as you were previously. If he puts his head down
+on the mat and relaxes, tell him in a calm voice how good he is and hand him a food treat.
+
+End every session by saying the same release word or phrase. Consider "OK", "All done",
+"That's it" or "You're finished". Whichever you choose, be consistent. Since the only rewards
+your dog has received up to this point are your praise and food treats, now is a good time to
+pet your dog if you think he will appreciate it.`,
+  tips: [
+    "Keep the food treats out of sight. If you hold the treats directly in front of the dog, he will focus on the food. Consider keeping treats in your pocket, behind your back or in a treat bag which hangs from the back of your body.",
+    "Throughout the program, deliver the food treats as quickly as possible to your dog's mouth. The faster you give the treats, the less opportunity your dog will have to think about doing something else and the more likely he will be to stay on his mat and associate the food reward with the appropriate behavior. Use your voice, in calm soothing tones, to keep him relaxed. Softly talk to him non-stop if necessary.",
+    "Any food dropped on the floor is “free”; your dog may get up to eat the treat. After he is finished, direct him gently back to his mat and ask him to lie down and stay then continue with the exercises. DO NOT ATTEMPT TO RETRIEVE DROPPED TREATS YOURSELF.",
+    "If necessary, work in a small room with minimal distractions and the door closed. Do not push on your dog, pull down on a leash or stand on a leash to get him to lie down. Corrections and reprimands will only make your dog nervous. He cannot be relaxed and learn effectively if one of you is upset. Remain calm and be patient; your dog will eventually understand what you want. Both of you are allowed to make mistakes!",
+    "If you find that, after a few attempts, your dog is unable to do an exercise, try to minimize the distraction. For example, take 10 steps away from the dog instead of fifteen or softly knock on an interior door rather than bang on the entry door. If your dog is still experiencing difficulty, skip over that exercise and contact the Behavior Service.",
+    "If your dog appears to have lost interest in the exercises (routinely gets up and walks away or seems unable to concentrate), decrease the length of the sessions and/or use a higher valued food treat. It may also help to work with your dog when he is hungry. If this problem continues, contact the Behavior Service.",
+    "If you have multiple dogs, they should be separated from you while you are practicing. Your dog will not be able to relax if he has to compete with other dogs for food rewards or try to concentrate while they are barking. You can place them outside where they cannot hear you, ask another family member to play with them or give them a food-related toy like a stuffed Kong while you work with your dog. It's best if the other dogs are not on the other side of a closed door from your work area; this can be very distracting or distressing to the dog working with you.",
+    "Never reward a dog that is growling, lunging, barking, whining, consistently attempting to escape, or trembling. If your dog is showing signs of fear or aggression in response to these exercises, please discontinue the program and contact the Behavior Service immediately.",
+    "If your dog is too anxious to lie down, these exercises may be completed with your dog standing or sitting until he is comfortable lying on his mat. Your pet may move around and may not be able to stay on the mat during his first sessions as well. Keep your sessions short (under two minutes) and use extra high value food rewards until your dog can be calm during this process. Do not force your pet to stay in one place.",
+  ],
+  source: "The Ohio State University Veterinary Medical Center, Behavioral Medicine — Hospital for Companion Animals, 614-292-3551",
+};
+
+const MODULES = [
+  {
+    id: 1,
+    steps: [
+      "Stand in front of him for 3 seconds",
+      "Stand in front of him for 5 seconds",
+      "Stand in front of him for 10 seconds",
+      "Take one step to the right",
+      "Take one step to the left",
+      "Take one step back",
+      "Take two steps to the right",
+      "Take two steps to the left",
+      "Take two steps back",
+      "Clap your hands softly once",
+      "Clap your hands softly twice",
+      "Clap your hands softly three times",
+    ],
+  },
+  {
+    id: 2,
+    steps: [
+      "Stand in front of him for 10 seconds",
+      "Stand in front of him for 15 seconds",
+      "Take two, three or four steps to the left",
+      "Take two, three or four steps to the right",
+      "Take two, three or four steps back",
+      "Clap your hands once",
+      "Clap your hands twice",
+      "Clap your hands three times",
+      "Count out loud to 5",
+      "Count out loud to 10",
+      "Count out loud to 15",
+    ],
+  },
+  {
+    id: 3,
+    steps: [
+      "Stand in front of him for 10 seconds",
+      "Stand in front of him for 15 seconds",
+      "Clap your hands three times",
+      "Clap your hands for 5 seconds",
+      "Clap your hands for 10 seconds",
+      "Count out loud to 10",
+      "Count out loud to 15",
+      "Count out loud to 20",
+      "Walk ¼ of the way around the dog to the left",
+      "Walk ¼ of the way around the dog to the right",
+      "Walk ½ of the way around the dog to the left",
+      "Walk ½ of the way around the dog to the right",
+    ],
+  },
+  {
+    id: 4,
+    steps: [
+      "Clap your hands for 10 seconds",
+      "Clap your hands for 15 seconds",
+      "Take two steps to the left, clap your hands once",
+      "Take two steps to the right, clap your hands once",
+      "Take two steps back, clap your hands once",
+      "Take five steps to the right, clap three times",
+      "Take five steps to the left, clap three times",
+      "Take five steps back, clap three times",
+      "Walk ¾ of the way around the dog to the left",
+      "Walk ¾ of the way around the dog to the right",
+      "Walk all of the way around the dog to the left",
+      "Walk all of the way around the dog to the right",
+    ],
+  },
+  {
+    id: 5,
+    steps: [
+      "Count out loud to 15",
+      "Count out loud to 20",
+      "Jog quietly in place for three seconds",
+      "Jog quietly in place for five seconds",
+      "Jog quietly in place for ten seconds",
+      "Take ten steps to the left",
+      "Take ten steps to the right",
+      "Take ten steps back",
+      "Take fifteen steps to the left",
+      "Take fifteen steps to the right",
+      "Take fifteen steps back",
+      "Squat down and immediately stand up",
+    ],
+  },
+  {
+    id: 6,
+    steps: [
+      "Take eight steps to the left, clap twice",
+      "Take eight steps to the right, clap twice",
+      "Take eight steps back, clap twice",
+      "Jog quietly in place for 10 seconds",
+      "Jog five steps backwards",
+      "Jog five steps to the right",
+      "Jog five steps to the left",
+      "Jog ten steps backwards",
+      "Jog ten steps to the right",
+      "Jog ten steps to the left",
+      "Stand in front of him for 10 seconds",
+      "Stand in front of him for 15 seconds",
+      "Stand in front of him for 20 seconds",
+    ],
+  },
+  {
+    id: 7,
+    steps: [
+      "Jog eight steps to the left",
+      "Jog eight steps to the right",
+      "Jog eight steps back",
+      "Jog ¼ of the way around the dog to the left",
+      "Jog ¼ of the way around the dog to the right",
+      "Jog ½ of the way around the dog to the left",
+      "Jog ½ of the way around the dog to the right",
+      "Take ten steps to the left while you clap softly",
+      "Take ten steps to the right while you clap softly",
+      "Take ten steps back while you clap softly",
+      "Squat down, immediately stand up and count out loud to three",
+      "Squat down, immediately stand up and count out loud to five",
+      "Squat down, immediately stand up and count out loud to ten",
+    ],
+  },
+  {
+    id: 8,
+    steps: [
+      "Walk all of the way around the dog to the left",
+      "Walk all of the way around the dog to the right",
+      "Jog ¾ of the way around the dog to the left",
+      "Jog ¾ of the way around the dog to the right",
+      "Jog all of the way around the dog to the left",
+      "Jog all of the way around the dog to the right",
+      "Sit in a chair near him for 30 seconds",
+      "Sit in a chair near him and count out loud to 10",
+      "Sit in a chair near him and count out loud to 15",
+      "Sit in a chair near him and count out loud to 20",
+      "Bend over and touch your toes",
+      "Stand in front of him for 15 seconds",
+      "Stand in front of him for 20 seconds",
+    ],
+  },
+  {
+    id: 9,
+    steps: [
+      "Walk to the nearest doorway",
+      "Walk to the nearest doorway and stand for 5 seconds",
+      "Walk to the nearest doorway and stand for 10 seconds",
+      "Take three steps to the left, clap your hands once",
+      "Take three steps to the right, clap your hands once",
+      "Take three steps back, clap your hands once",
+      "Take ten steps to the right, clap three times",
+      "Take ten steps to the left, clap three times",
+      "Take ten steps back, clap three times",
+      "Knock on the wall softly",
+      "Knock on the wall moderately",
+      "Bend over and touch your toes",
+    ],
+  },
+  {
+    id: 10,
+    steps: [
+      "Walk to the nearest doorway and stand for 10 seconds",
+      "Walk to the nearest doorway and touch the door",
+      "Walk to the nearest doorway and touch the doorknob",
+      "Walk to the nearest doorway and wiggle the doorknob",
+      "Jog in place for 10 seconds while clapping your hands",
+      "Jog in place for 15 seconds while clapping your hands",
+      "Jog in place for 20 seconds while clapping your hands",
+      "Knock on the wall softly",
+      "Knock on the wall moderately",
+      "Knock on the wall loudly",
+      "Squat down, immediately stand up and count out loud to three",
+      "Squat down, immediately stand up and count out loud to five",
+      "Squat down, immediately stand up and count out loud to ten",
+    ],
+  },
+  {
+    id: 11,
+    steps: [
+      "Jog ½ of the way around the dog to the left, while humming",
+      "Jog ½ of the way around the dog to the right, while humming",
+      "Jog all of the way around the dog to the left, while humming",
+      "Jog all of the way around the dog to the right, while humming",
+      "Walk to the nearest doorway and knock softly",
+      "Walk to the nearest doorway and knock moderately",
+      "Walk to the nearest doorway and knock loudly",
+      "Walk to the nearest doorway and wiggle the doorknob",
+      "Walk to the nearest doorway, open the door and leave it opened",
+      "Walk to the open doorway and stand for 5 seconds",
+      "Walk to the open doorway and stand for 15 seconds",
+      "Walk to the open doorway and stand for 30 seconds",
+      "Clap your hands for 10 seconds",
+      "Clap your hands for 15 seconds",
+      "Clap your hands for 20 seconds",
+    ],
+  },
+  {
+    id: 12,
+    steps: [
+      "Walk to the open doorway and stand for 10 seconds",
+      "Walk through the opened doorway and take 1 step to the left, out of his sight",
+      "Walk through the opened doorway and take 1 step to the right, out of his sight",
+      "Walk through the opened doorway and take 1 step to the left, out of his sight for 5 seconds",
+      "Walk through the opened doorway and take 1 step to the right, out of his sight for 5 seconds",
+      "Walk through the opened doorway and take 1 step to the left, out of his sight for 10 seconds",
+      "Walk through the opened doorway and take 1 step to the right, out of his sight for 10 seconds",
+      "Sit in a chair near him for 15 seconds",
+      "Sit in a chair near him for 20 seconds",
+      "Sit in a chair near him for 30 seconds",
+      "Bend over and touch your toes",
+      "Bend over, touch your toes then clap your hands three times",
+      "Bend over, touch your toes then clap your hands five times",
+    ],
+  },
+  {
+    id: 13,
+    steps: [
+      "Walk through the opened doorway and take 1 step to the left, out of his sight for 5 seconds",
+      "Walk through the opened doorway and take 1 step to the right, out of his sight for 5 seconds",
+      "Walk through the opened doorway and take 1 step to the left, out of his sight for 15 seconds",
+      "Walk through the opened doorway and take 1 step to the right, out of his sight for 15 seconds",
+      "Walk through the opened doorway and take 1 step to the left, out of his sight for 30 seconds",
+      "Walk through the opened doorway and take 1 step to the right, out of his sight for 30 seconds",
+      "Leave the room for one minute",
+      "Stand in front of him for 10 seconds",
+      "Stand in front of him for 15 seconds",
+      "Stand in front of him for 20 seconds",
+      "Jog in place for 10 seconds while humming",
+      "Jog in place for 15 seconds while humming",
+      "Jog in place for 20 seconds while humming",
+    ],
+  },
+  {
+    id: 14,
+    steps: [
+      "Walk through the opened doorway, take 1 step out of his sight and knock softly once on the wall",
+      "Walk through the opened doorway, take 1 step out of his sight and knock softly five times on the wall",
+      "Walk through the opened doorway, take 1 step out of his sight and knock three times on the wall",
+      "Walk through the opened doorway, take 1 step out of his sight, knock on the wall and say hello",
+      "Stand in front of your dog while a helper rings the doorbell once",
+      "Stand in front of your dog while a helper rings the doorbell twice",
+      "Stand in front of your dog while a helper rings the doorbell three times",
+      "Sit in a chair near him and count out loud to 10",
+      "Sit in a chair near him and count out loud to 15",
+      "Sit in a chair near him and count out loud to 20",
+      "Bend over and touch your toes",
+      "Bend over, touch your toes then clap your hands three times",
+      "Bend over, touch your toes then clap your hands five times",
+    ],
+  },
+  {
+    id: 15,
+    steps: [
+      "Leave the room for 1 minute",
+      "Leave the room for 1 minute and say, “hello”, wait 3 seconds",
+      "Leave the room and ring the doorbell",
+      "Leave the room, ring the doorbell and say, “hello”",
+      "Leave the room, ring the doorbell, say, “hello” and wait 5 seconds",
+      "Leave the room, ring the doorbell, say, “hello” and hold a conversation for 10 seconds",
+      "Leave the room for 1½ minutes",
+      "Jog ½ of the way around the dog to the left, while humming",
+      "Jog ½ of the way around the dog to the right, while humming",
+      "Jog all of the way around the dog to the left, while humming",
+      "Jog all of the way around the dog to the right, while humming",
+      "Count out loud to 10",
+      "Count out loud to 15",
+      "Count out loud to 20",
+    ],
+  },
+];
