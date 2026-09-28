@@ -90,6 +90,14 @@ function navigate(hash) {
 window.addEventListener("hashchange", render);
 window.addEventListener("DOMContentLoaded", render);
 
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch((err) => {
+      console.warn("Service worker registration failed:", err);
+    });
+  });
+}
+
 function render() {
   const route = parseHash();
   window.scrollTo(0, 0);
