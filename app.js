@@ -71,7 +71,8 @@ function el(html) {
 function parseHash() {
   const hash = location.hash.replace(/^#\/?/, "");
   if (hash === "" || hash === "home") return { view: "home" };
-  if (hash === "about") return { view: "about" };
+  const aboutMatch = hash.match(/^about(?:\/([a-z-]+))?$/);
+  if (aboutMatch) return { view: "about", sectionId: aboutMatch[1] || null };
   const moduleMatch = hash.match(/^module\/(\d+)(?:\/(one))?$/);
   if (moduleMatch) {
     return {
@@ -102,7 +103,7 @@ function render() {
   const route = parseHash();
   window.scrollTo(0, 0);
   if (route.view === "about") {
-    renderAbout();
+    renderAbout(route.sectionId);
   } else if (route.view === "module") {
     renderModule(route.id, route.mode);
   } else {
@@ -112,12 +113,14 @@ function render() {
 
 // ---------- Views ----------
 
-function renderTopbar(title, backHash, homeStyle) {
+function renderTopbar(title, backHash, opts) {
+  opts = opts || {};
   return `
-    <div class="topbar${homeStyle ? " home" : ""}">
+    <div class="topbar${opts.home ? " home" : ""}">
       <div class="topbar-inner">
-        ${backHash ? `<a class="back-link" href="#${backHash}">&larr; Back</a>` : ""}
+        ${backHash ? `<a class="icon-btn back-link" href="#${backHash}" aria-label="Back">&larr;</a>` : ""}
         <h1>${title}</h1>
+        ${!opts.home ? `<div class="topbar-right">${opts.rightHtml || ""}</div>` : ""}
       </div>
     </div>
   `;
@@ -146,7 +149,7 @@ function renderHome() {
   }).join("");
 
   root.innerHTML = `
-    ${renderTopbar("Relaxation Protocol", null, true)}
+    ${renderTopbar("Relaxation Protocol", null, { home: true })}
     <div class="wrap">
       <div class="hero">
         <h1>Relaxation Protocol</h1>
@@ -163,67 +166,116 @@ function renderHome() {
       <ul class="module-list">
         ${items}
       </ul>
-      <div class="footer-note">${escapeHtml(INTRO.source)}</div>
+      <div class="footer-note">${escapeHtml(ABOUT_SOURCE)}</div>
     </div>
   `;
 }
 
-function renderAbout() {
-  const list = (arr) => arr.map((s) => `<li>${escapeHtml(s)}</li>`).join("");
+function renderAboutSectionBody(section) {
+  let html = "";
+  if (section.paragraphs && section.id !== "getting-started") {
+    html += section.paragraphs.map((p) => `<p>${escapeHtml(p)}</p>`).join("");
+  }
+  if (section.orderedList) {
+    html += `<ol>${section.orderedList.map((s) => `<li>${escapeHtml(s)}</li>`).join("")}</ol>`;
+  }
+  if (section.id === "getting-started" && section.paragraphs) {
+    html += section.paragraphs.map((p) => `<p>${escapeHtml(p)}</p>`).join("");
+  }
+  if (section.list) {
+    html += `<ul>${section.list.map((s) => `<li>${escapeHtml(s)}</li>`).join("")}</ul>`;
+  }
+  if (section.callout) {
+    html += `<div class="callout">${escapeHtml(section.callout)}</div>`;
+  }
+  return html;
+}
+
+function renderAbout(sectionId) {
+  let index = ABOUT_SECTIONS.findIndex((s) => s.id === sectionId);
+  if (index === -1) index = 0;
+  const section = ABOUT_SECTIONS[index];
+  const prev = ABOUT_SECTIONS[index - 1];
+  const next = ABOUT_SECTIONS[index + 1];
+
+  const tocBtn = `<button class="icon-btn" id="toc-btn" aria-label="Jump to section">&#9776;</button>`;
+
   root.innerHTML = `
-    ${renderTopbar("About", "/")}
+    ${renderTopbar("About", "/", { rightHtml: tocBtn })}
     <div class="wrap">
-      <div class="section" style="margin-top:20px;">
-        <h2>Purpose</h2>
-        <p>${escapeHtml(INTRO.purpose)}</p>
+      <div class="about-meta">Section ${index + 1} of ${ABOUT_SECTIONS.length}</div>
+      <div class="section-dots">
+        ${ABOUT_SECTIONS.map((s, i) => `<button data-id="${s.id}" class="${i === index ? "current" : ""}" aria-label="${escapeHtml(s.title)}"></button>`).join("")}
       </div>
-      <div class="section">
-        <h2>Practice, practice, practice</h2>
-        <p>${escapeHtml(INTRO.progress)}</p>
+
+      <div class="about-section-card section" id="about-swipe">
+        <h2>${escapeHtml(section.title)}</h2>
+        ${renderAboutSectionBody(section)}
       </div>
-      <div class="section">
-        <h2>The exercises</h2>
-        <p>${escapeHtml(INTRO.exercises)}</p>
+
+      <div class="module-nav">
+        ${prev ? `<a href="#about/${prev.id}">&larr; ${escapeHtml(prev.title)}</a>` : `<span>&larr;</span>`}
+        ${next ? `<a href="#about/${next.id}">${escapeHtml(next.title)} &rarr;</a>` : `<span>&rarr;</span>`}
       </div>
-      <div class="section">
-        <h2>Household</h2>
-        <p>${escapeHtml(INTRO.household)}</p>
+
+      <div class="footer-note">${escapeHtml(ABOUT_SOURCE)}</div>
+    </div>
+
+    <div class="toc-overlay" id="toc-overlay" hidden>
+      <div class="toc-backdrop" id="toc-backdrop"></div>
+      <div class="toc-sheet">
+        <div class="toc-sheet-header">
+          <span>Jump to section</span>
+          <button class="icon-btn" id="toc-close" aria-label="Close">&times;</button>
+        </div>
+        <ul class="toc-list">
+          ${ABOUT_SECTIONS.map((s, i) => `<li><a href="#about/${s.id}" class="${i === index ? "current" : ""}">${escapeHtml(s.title)}</a></li>`).join("")}
+        </ul>
       </div>
-      <div class="section">
-        <h2>The mat</h2>
-        <p>${escapeHtml(INTRO.mat)}</p>
-      </div>
-      <div class="section">
-        <h2>Modules &amp; sessions</h2>
-        <p>${escapeHtml(INTRO.modules)}</p>
-      </div>
-      <div class="section">
-        <h2>Choosing a room</h2>
-        <p>${escapeHtml(INTRO.room)}</p>
-      </div>
-      <div class="section">
-        <h2>Rewards</h2>
-        <p>${escapeHtml(INTRO.reward)}</p>
-      </div>
-      <div class="section">
-        <h2>Food treat guidelines</h2>
-        <ul>${list(INTRO.treats)}</ul>
-      </div>
-      <div class="section">
-        <h2>Getting started</h2>
-        <ol>${INTRO.gettingStarted.map((s) => `<li>${escapeHtml(s)}</li>`).join("")}</ol>
-        <p>${escapeHtml(INTRO.gettingStartedNotes)}</p>
-      </div>
-      <div class="section">
-        <h2>Tips</h2>
-        <ul>${list(INTRO.tips)}</ul>
-      </div>
-      <div class="callout">
-        If your dog is growling, lunging, barking, whining, consistently trying to escape, or trembling: stop, do not reward, and contact the Behavior Service.
-      </div>
-      <div class="footer-note">${escapeHtml(INTRO.source)}</div>
     </div>
   `;
+
+  const overlay = root.querySelector("#toc-overlay");
+  root.querySelector("#toc-btn").addEventListener("click", () => {
+    overlay.hidden = false;
+  });
+  root.querySelector("#toc-backdrop").addEventListener("click", () => {
+    overlay.hidden = true;
+  });
+  root.querySelector("#toc-close").addEventListener("click", () => {
+    overlay.hidden = true;
+  });
+
+  root.querySelectorAll(".section-dots button").forEach((dot) => {
+    dot.addEventListener("click", () => navigate(`/about/${dot.dataset.id}`));
+  });
+
+  // swipe left/right between sections (ignored when the gesture is mostly vertical,
+  // so it doesn't fight with normal page scrolling)
+  const swipeTarget = root.querySelector("#about-swipe");
+  let touchStartX = null;
+  let touchStartY = null;
+  swipeTarget.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+      touchStartY = e.changedTouches[0].clientY;
+    },
+    { passive: true }
+  );
+  swipeTarget.addEventListener(
+    "touchend",
+    (e) => {
+      if (touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      touchStartX = null;
+      if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+      if (dx < 0 && next) navigate(`/about/${next.id}`);
+      else if (dx > 0 && prev) navigate(`/about/${prev.id}`);
+    },
+    { passive: true }
+  );
 }
 
 function renderModule(id, mode) {
