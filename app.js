@@ -313,6 +313,7 @@ function renderModule(id, mode) {
           <h1>Module ${id}</h1>
           <div class="sub">${total} exercises</div>
         </div>
+        <button class="link-btn" id="reset-btn">Reset progress</button>
       </div>
 
       <div class="mode-toggle">
@@ -326,10 +327,6 @@ function renderModule(id, mode) {
       <div class="module-nav">
         ${prevModule ? `<a href="#module/${prevModule.id}${mode === "one" ? "/one" : ""}">&larr; Module ${prevModule.id}</a>` : `<span>&larr;</span>`}
         ${nextModule ? `<a href="#module/${nextModule.id}${mode === "one" ? "/one" : ""}">Module ${nextModule.id} &rarr;</a>` : `<span>&rarr;</span>`}
-      </div>
-
-      <div class="utility-row">
-        <button class="link-btn" id="reset-btn">Reset progress for this module</button>
       </div>
     </div>
   `;

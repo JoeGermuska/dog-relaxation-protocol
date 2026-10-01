@@ -478,6 +478,13 @@ button {
   gap: 12px;
 }
 
+.module-header .link-btn {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin-top: 3px;
+  padding: 4px 0 4px 10px;
+}
+
 .module-header h1 {
   font-size: 24px;
   margin: 0 0 4px;
@@ -684,12 +691,6 @@ button {
 .module-nav a {
   color: var(--text);
   background: var(--surface);
-}
-
-.utility-row {
-  display: flex;
-  justify-content: center;
-  margin-top: 18px;
 }
 
 .link-btn {
