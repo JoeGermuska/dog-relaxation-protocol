@@ -200,10 +200,27 @@ function renderAbout(sectionId) {
 
   const tocBtn = `<button class="icon-btn" id="toc-btn" aria-label="Jump to section">&#9776;</button>`;
 
+  const prevIcon = prev
+    ? `<a class="icon-btn" href="#about/${prev.id}" aria-label="Previous: ${escapeHtml(prev.title)}">&larr;</a>`
+    : `<span class="icon-btn disabled" aria-hidden="true">&larr;</span>`;
+  const nextIcon = next
+    ? `<a class="icon-btn" href="#about/${next.id}" aria-label="Next: ${escapeHtml(next.title)}">&rarr;</a>`
+    : `<span class="icon-btn disabled" aria-hidden="true">&rarr;</span>`;
+  const navHtml = `
+    <div class="module-nav">
+      ${prev ? `<a href="#about/${prev.id}">&larr; ${escapeHtml(prev.title)}</a>` : `<span>&larr;</span>`}
+      ${next ? `<a href="#about/${next.id}">${escapeHtml(next.title)} &rarr;</a>` : `<span>&rarr;</span>`}
+    </div>
+  `;
+
   root.innerHTML = `
     ${renderTopbar("About", "/", { rightHtml: tocBtn })}
     <div class="wrap">
-      <div class="about-meta">Section ${index + 1} of ${ABOUT_SECTIONS.length}</div>
+      <div class="about-topnav">
+        ${prevIcon}
+        <div class="about-meta">Section ${index + 1} of ${ABOUT_SECTIONS.length}</div>
+        ${nextIcon}
+      </div>
       <div class="section-dots">
         ${ABOUT_SECTIONS.map((s, i) => `<button data-id="${s.id}" class="${i === index ? "current" : ""}" aria-label="${escapeHtml(s.title)}"></button>`).join("")}
       </div>
@@ -213,10 +230,7 @@ function renderAbout(sectionId) {
         ${renderAboutSectionBody(section)}
       </div>
 
-      <div class="module-nav">
-        ${prev ? `<a href="#about/${prev.id}">&larr; ${escapeHtml(prev.title)}</a>` : `<span>&larr;</span>`}
-        ${next ? `<a href="#about/${next.id}">${escapeHtml(next.title)} &rarr;</a>` : `<span>&rarr;</span>`}
-      </div>
+      ${navHtml}
 
       <div class="footer-note">${escapeHtml(ABOUT_SOURCE)}</div>
     </div>

@@ -314,11 +314,23 @@ button {
 }
 
 /* About page: one section at a time, swipeable */
+.about-topnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.icon-btn.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 .about-meta {
   font-size: 13px;
   color: var(--text-dim);
   text-align: center;
-  margin: 14px 0 0;
+  margin: 0;
 }
 
 .section-dots {
@@ -326,7 +338,7 @@ button {
   gap: 6px;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 10px 0 0;
+  margin: 8px 0 0;
 }
 
 .section-dots button {
